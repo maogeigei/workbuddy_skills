@@ -2,6 +2,8 @@
 
 我自己用的 WorkBuddy 技能，攒一个放一个。
 
+![multi-session-collab 的协作看板](multi-session-collab/assets/board-screenshot.png)
+
 | 技能 | 干什么 |
 |---|---|
 | [multi-session-collab](multi-session-collab/) | 一个主会话带多个子会话干同一个活，管住节奏：不互相等、不打架、不把排期当成果 |
