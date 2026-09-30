@@ -133,6 +133,7 @@ claim 超过 20 分钟没续期，程序自动把它挪去 `claims-stale/`，可
 
 ```
 multi-session-collab/
+├── README.md                      本文件
 ├── SKILL.md                       操作入口：怎么派活、怎么收尾、怎么排坑
 ├── references/
 │   ├── architecture.md            架构，唯一权威
@@ -180,7 +181,37 @@ multi-session-collab/
 5. `collabd.py --declare --role main` 能声明会话角色
 6. `python scripts/selftest.py` 全绿
 
-## 七、已知边界
+## 七、这份开源版做过什么脱敏
+
+代码是从作者本机正在跑的那一份导出来的，功能没动，改动只有一类：去掉只对作者那台机器有意义的东西。
+
+**删掉的**
+
+- 写死的本机绝对路径。配置目录的回退值原来是具体盘符，现在回退到 `~/.workbuddy`
+- 内网域名、私有项目名、服务器地址。文档里的例子换成 `<业务线A>`、`示例主题` 这类占位
+- 一段业务专属的前置探测（去探两个业务进程的端口和日志）。它本来就不属于这套机制，部署手册里自己也写着"本机制不含业务专属项"
+- 一节业务链路的部署说明，里面全是私有域名、路径和启动命令
+
+**改了名字的环境变量**
+
+| 原来 | 现在 |
+|---|---|
+| `DSH_COLLAB_WS` | `COLLABD_WS` |
+| `DSH_GUARDED` | `COLLABD_GUARDED` |
+
+**需要你自己配的**
+
+| 环境变量 | 作用 | 不配会怎样 |
+|---|---|---|
+| `COLLABD_CONFIG` | 配置文件路径 | 转去找 `<工作区>/.workbuddy/collab/collabd.config.json`，都找不到就拒绝启动 |
+| `COLLABD_WS` | 工作区路径 | 回落到当前目录 |
+| `COLLABD_HOOK_PATH` | 钩子脚本路径 | 自测跳过"钩子里确实调了 `--tick`"这条检查 |
+| `COLLABD_LEAK_PAT` | 你自己项目的专属串（正则） | 自测只做结构性检查，不查项目串泄漏 |
+| `COLLABD_STALE_KEYS` | 你已废弃的看板键名，用 `|` 分隔 | 同上，这条跳过 |
+
+脱敏之后跑了一遍回归自测，26 条用例全绿（`python scripts/selftest.py`）。
+
+## 八、已知边界
 
 写在这里，免得照着文档再踩一遍。
 
@@ -194,6 +225,6 @@ multi-session-collab/
 
 **宿主是硬依赖。** 钩子和宿主数据库是这套机制的地基，离开 WorkBuddy 跑不起来。
 
-## 八、许可
+## 九、许可
 
 暂未选定。要用的话先说一声。

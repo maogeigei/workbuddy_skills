@@ -1,0 +1,43 @@
+{
+  "_说明": "复制为 collabd.config.json（放在 collabd.py 同目录）并改成你的项目路径；也可用环境变量 COLLABD_CONFIG 指向别处的配置文件。",
+  "workspace": "E:/<你的工作区>",
+  "inbox": "tmp/supervise-inbox",
+  "live": "交付物/协作实时状态.md",
+  "taskgraph": "交付物/任务图.json",
+  "lines": {
+    "line-a": "A 线",
+    "line-b": "B 线"
+  },
+  "goal_docs": [
+    [
+      "验收判据 / 目标",
+      "交付物/目标与验收判据.md"
+    ],
+    [
+      "进度看板",
+      "交付物/进度看板.md"
+    ]
+  ],
+  "targets": {
+    "line-a": [
+      [
+        "棒1 执行单",
+        "docs/执行单_*.md"
+      ]
+    ],
+    "line-b": [
+      [
+        "对接单产出",
+        "docs/*对接单*.md"
+      ]
+    ]
+  },
+  "host_db": "",
+  "singleton_port": 20099,
+  "interval": 10,
+  "idle_min": 12,
+  "stuck_min": 30,
+  "vacuum_min": 5,
+  "health_every": 300,
+  "_边界": "⛔ 本机制（协作）不含任何业务专属项（如业务端口探测、业务客户端拉起）——那些属各业务线自己的件。"
+}
