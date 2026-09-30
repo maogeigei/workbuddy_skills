@@ -6,7 +6,7 @@
 
 | 技能 | 干什么 |
 |---|---|
-| [multi-session-collab](multi-session-collab/) | 一个主会话带多个子会话干同一个活。管住三件事：不互相等，不打架，不把排期当成成果 |
+| [multi-session-collab](multi-session-collab/) | 把一个需求交给一群 AI 会话并行干：进度自己往前推，完成是真完成，出事才找你 |
 
 每个技能目录里有自己的 README，怎么装、哪里有坑都写在里面。
 
